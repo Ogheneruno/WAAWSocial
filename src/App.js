@@ -1,65 +1,49 @@
 import './App.css';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@mui/material/Button';
-import NavBar from './components/Navbar';
-import { Grid } from '@material-ui/core';
-import Left from './components/Left';
-import MainField from './components/MainFeed';
-import Right from './components/Right'
-import Add from './components/Add';
-import ForumRoundedIcon from '@material-ui/icons/ForumRounded';
-import PeopleOutlineRoundedIcon from '@material-ui/icons/PeopleOutlineRounded';
-import AddIcon from '@material-ui/icons/Add';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Login from './components/pages/auth/Login';
+import Register from './components/pages/auth/Register';
+import Timeline from './components/pages/timeline/Timeline';
+import { Toaster } from 'react-hot-toast';
+import VerifyUser from './components/pages/auth/VerifyUser';
+import Profile from './components/pages/profile/Profile';
 
-
-const useStyles = makeStyles((theme) => ({
-  left: {
-    backgroundColor: ''
-  },
-
-  center: {
-    backgroundColor: ''
-  },
-
-  right: {
-    [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
-  }
-  
-}));
 
 function App() {
-  const classes = useStyles();
+  
   
 
   return (
   <>
-  <div>
-    <NavBar />
-      <Grid container>
-        <Grid className={classes.left} item sm={2} xs={2}>
-          <Left />
-        </Grid>
+ 
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Timeline}></Route>
+        <Route path="/login" component={Login}></Route>
+        <Route path="/register" component= {Register}></Route>
+        <Route path="/verify-user" component= {VerifyUser}></Route>
+        <Route path="/profile" component= {Profile}></Route>
 
-        <Grid className={classes.center} item sm={7} xs={10}>
-        <MainField />
-        </Grid>
+      </Switch>
+    </Router>
+    <Toaster 
+      position="top-right"
+      toastOptions={{
+        duration: 5000,
+        success: {
+          style: {
+            background: 'green',
+            color: 'white'
+          },
+        },
+        error: {
+          style: {
+            background: 'red',
+            color: 'white'
+          },
+        },
+      }}
+    />
 
-        <Grid className={classes.right} item sm={3}>
-        <Right />
-        </Grid>
-    </Grid>
-    <Add Icon={AddIcon} iconName='post' color='secondary' />
-    <Add Icon={ForumRoundedIcon} iconName='chat' color='default' />
-    <Add Icon={PeopleOutlineRoundedIcon} iconName='friends' color='primary' />
-
-  </div>
-  <div className="App">
-    <h1 className={classes.heading}>Welcome to She Hacks Africa Academy</h1>
-    <p className={classes.heading}>Good to know</p>
-    <Button variant="outlined" size="small" color="primary">Click me</Button>
-  </div>
   </>
   );
 }

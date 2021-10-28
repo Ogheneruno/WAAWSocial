@@ -1,4 +1,4 @@
-import { Container, makeStyles, Typography, alpha, IconButton } from '@material-ui/core';
+import { Container, makeStyles, Typography, IconButton } from '@material-ui/core';
 import { Home } from '@material-ui/icons';
 import React from 'react';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';

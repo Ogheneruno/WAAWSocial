@@ -1,0 +1,54 @@
+.register {
+    position: absolute;
+    box-shadow: 0 2px 12px -3px rgba(0, 0, 0, 0.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    padding: 40px;
+}
+
+.holder {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.register h3 {
+    border-bottom: 4px solid #3f51b5;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0,.6);
+    max-width: 160px;
+    margin: 5px 0 30px 5px;
+    padding-bottom: 10px;
+    margin-left: 15px;
+    font-size: 30px;
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+.confirm {
+    position: absolute;
+    box-shadow: 0 2px 12px -3px rgba(0, 0, 0, 0.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    padding: 40px;
+}
+
+.confirm h3 {
+    border-bottom: 4px solid #3f51b5;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0,.6);
+    max-width: 225px;
+    margin: 5px 0 30px 5px;
+    padding-bottom: 10px;
+    margin-left: 15px;
+    font-size: 30px;
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 450px) {
+    .register {
+        width: 90vw;
+    }
+}

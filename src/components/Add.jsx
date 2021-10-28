@@ -8,17 +8,17 @@ const useStyles = makeStyles(theme => ({
         position: 'fixed',
     },
 
-    post: {
+    chat: {
         bottom: 20,
         right: 23
     },
 
-    chat: {
+    friends: {
         bottom: 90,
         right: 23
     },
 
-    friends: {
+    post: {
         bottom: 160,
         right: 23
     }

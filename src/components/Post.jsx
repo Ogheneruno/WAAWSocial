@@ -16,14 +16,15 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { format } from 'timeago.js';
 
 const useStyles = makeStyles((theme) => ({
   root: {
         marginBottom: theme.spacing(4)
     },
   media: {
-    height: 250,
-    paddingTop: '56.25%', // 16:9
+    height: 'auto',
+    // paddingTop: '56.25%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({data}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,28 +53,45 @@ export default function RecipeReviewCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            OO
-          </Avatar>
+          <Avatar src={data.user ? data.user.avatar : ''} className={classes.avatar} />
+  
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={data.user.username}
+        subheader={format(data.createdAt)}
       />
-      <CardMedia
-        className={classes.media}
-        // image="/static/images/cards/paella.jpg"
-        image="https://images.unsplash.com/photo-1633381521050-26bb467d9d5a?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3OHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-        title="Paella dish"
-      />
+
+        {
+          data.mediaType === 'Image' ? (
+            <CardMedia
+            className={classes.media}
+            component="img"
+            src={
+              data.media
+            }
+            title={data.description}
+          />
+          ) : data.mediaType === 'Video' ?
+           (<CardMedia
+            className={classes.media}
+            component = 'video'
+            controls
+            autoplay
+            src={
+              data.media
+            }
+            title={data.description}
+          />) : null
+        }
+
+      
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {data.description}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

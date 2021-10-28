@@ -5,7 +5,7 @@ import AvatarGroup from '@material-ui/lab/AvatarGroup';
 const useStyles = makeStyles(theme => ({
     container: {
         paddingTop: theme.spacing(10),
-        postion: 'stickey',
+        position: 'sticky',
         top: 0
     }
 }))

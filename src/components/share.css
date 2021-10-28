@@ -1,0 +1,96 @@
+.share {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.68);
+    margin-bottom: 20px;
+}
+
+.share__wrapper {
+    padding: 10px;
+}
+
+.share__wrapper__top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.MuiAvatar-img, .share__profile__img {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+}
+
+.share__input {
+    outline: none;
+    border: none;
+    width: 50%
+
+}
+
+.share__hr {
+    margin: 15px;
+}
+
+.share__bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.share__options {
+    display: flex;
+    margin-left: 20px;
+    gap: 1rem;
+}
+
+.share__option {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.share__icon {
+    font-size: 18px;
+}
+
+.share__text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.share__button {
+    border: none;
+    background-color: greenyellow;
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    font-weight: 500;
+}
+
+.share__preview__container {
+    position: relative;
+}
+
+.share__img__preview {
+    width: 100%;
+    object-fit: cover;
+}
+
+.share__cancel {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    cursor: pointer;
+    color: red;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+    .share__text {
+        display: none;
+    }
+}
