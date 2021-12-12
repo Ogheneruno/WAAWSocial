@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   menuButton: {
+    display: 'none',
     marginRight: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      display: 'block',
+    },
   },
   title: {
     display: 'none',
@@ -79,6 +83,15 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  logo: {
+    display: 'inline-block',
+    textAlign: 'center',
+    lineHeight: '3rem',
+    fontWeight: 600,
+    // fontFamily: 'Oxygen', 'Courier monospace',
+    fontSize: '2rem',
+    textTransform: 'uppercase',
+  }
 }));
 
 export default function NavBar() {
@@ -108,6 +121,11 @@ export default function NavBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogOut = async () => {
+    localStorage.removeItem("user");
+    window.location.href = "/login";    
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -123,7 +141,7 @@ export default function NavBar() {
           user ?
           <>
             <MenuItem onClick={() => history.push('/profile')}>Profile</MenuItem>
-            <MenuItem onClick={() => history.push('/logout')}>Logout</MenuItem>
+            <MenuItem onClick={() => handleLogOut()}>Logout</MenuItem>
           </> :
           <>
             <MenuItem onClick={() => history.push('/login')}>Login</MenuItem>
@@ -191,7 +209,8 @@ export default function NavBar() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <span className={classes.logo}>WS</span>
+            {/* <MenuIcon /> */}
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             WAAW Social

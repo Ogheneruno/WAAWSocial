@@ -1,6 +1,6 @@
 import React, { useContext, useState , useRef, useEffect } from 'react';
 import './share.css';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import Avatar from '@material-ui/core/Avatar';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import { Cancel, EmojiEmotions, Room } from '@material-ui/icons';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container, makeStyles } from '@material-ui/core';
 import Post from './Post';
-import Share from './Share';
+import Share from './share/Share';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
 
@@ -34,7 +34,7 @@ const MainFeed = () => {
 
     useEffect(() => {
         getPosts();
-    }, [])
+    }, [posts])
 
     return (
        <Container className={classes.container}>
@@ -44,13 +44,6 @@ const MainFeed = () => {
                 <Post key={post._id} data={post} />
                ))
            }
-           
-           {/* <Post />
-           <Post />
-           <Post />
-           <Post />
-           <Post />
-           <Post /> */}
        </Container>
     )
 }

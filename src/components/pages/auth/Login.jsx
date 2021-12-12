@@ -1,5 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import axios from 'axios';
+import NavBar from '../../Navbar';
 import './register.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
@@ -58,21 +59,24 @@ const Login = () => {
     }
 
     return (
-        <div className="register">
-            <div className="holder">
-                <h3>User Login</h3>
-                <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
+        <>
+            <NavBar />
+            <div className="register">
+                <div className="holder">
+                    <h3>User Login</h3>
+                    <form className={classes.root} onSubmit={handleSubmit} noValidate autoComplete="off">
 
-                    <TextField id="outlined-basic" type="text" label="Username or Email" variant="outlined" inputRef={userInput} />
-                    <TextField id="outlined-basic" type="password" label="Password" variant="outlined" inputRef={password} />
+                        <TextField id="outlined-basic" type="text" label="Username or Email" variant="outlined" inputRef={userInput} />
+                        <TextField id="outlined-basic" type="password" label="Password" variant="outlined" inputRef={password} />
 
-                    <Button type={'submit'} className={classes.btn1} variant="contained">
-                        Login
-                    </Button>
+                        <Button type={'submit'} className={classes.btn1} variant="contained">
+                            Login
+                        </Button>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -30,4 +30,4 @@ const Right = () => {
     )
 }
 
-export default Right
+export default Right;
