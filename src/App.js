@@ -1,15 +1,19 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from './components/pages/auth/Login';
 import Register from './components/pages/auth/Register';
 import Timeline from './components/pages/timeline/Timeline';
 import { Toaster } from 'react-hot-toast';
 import VerifyUser from './components/pages/auth/VerifyUser';
 import Profile from './components/pages/profile/Profile';
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
+import { Redirect } from 'react-router-dom';
+import Messenger from './components/pages/messager/Messenger';
 
 
 function App() {
-  
+  const { user } = useContext(AuthContext);
   
 
   return (
@@ -17,12 +21,12 @@ function App() {
  
     <Router>
       <Switch>
-        <Route exact path="/" component={Timeline}></Route>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/register" component= {Register}></Route>
+        <Route exact path="/" component={Timeline}>{user ? <Timeline /> : <Register />}</Route>
+        <Route path="/login" component={Login}>{user ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/register" component= {Register}>{user ? <Redirect to="/" /> : <Register />}</Route>
+        <Route path="/messenger" component= {Messenger}>{!user ? <Redirect to="/" /> : <Messenger />}</Route>
         <Route path="/verify-user" component= {VerifyUser}></Route>
-        <Route path="/profile" component= {Profile}></Route>
-
+        <Route path="/profile/:username" component= {Profile}></Route>
       </Switch>
     </Router>
     <Toaster 

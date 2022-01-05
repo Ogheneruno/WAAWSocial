@@ -8,7 +8,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20ch',
+      width: '50ch',
     },
   },
   sectionDesktop: {
@@ -140,7 +140,7 @@ export default function NavBar() {
       {
           user ?
           <>
-            <MenuItem onClick={() => history.push('/profile')}>Profile</MenuItem>
+            <MenuItem onClick={() => history.push(`/profile/${user.user.username}`)}>Profile</MenuItem>
             <MenuItem onClick={() => handleLogOut()}>Logout</MenuItem>
           </> :
           <>
@@ -209,18 +209,22 @@ export default function NavBar() {
             color="inherit"
             aria-label="open drawer"
           >
-            <span className={classes.logo}>WS</span>
+            <Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>
+              <span className={classes.logo}>WS</span>
+            </Link>
             {/* <MenuIcon /> */}
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            WAAW Social
-          </Typography>
+          <Link to="/" style={{textDecoration: 'none', color: 'inherit'}}>
+            <Typography className={classes.title} variant="h6" noWrap>
+              WAAW Social
+            </Typography>
+          </Link>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search for friend, post or video…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,

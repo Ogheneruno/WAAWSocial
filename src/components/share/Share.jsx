@@ -23,15 +23,16 @@ const Share = () => {
     const addImage = async (e) => {
         setVideo(null);
         setImage(e.target.files[0]);
-        console.log("video:: ",video)
+        setVideo(null);
+        // console.log("video:: ",video)
 
     }
 
     const addVideo = async (e) => {
         setImage(null);
         setVideo(e.target.files[0]);
-        console.log("image::: ", image)
-
+        setImage(null);
+        // console.log("image::: ", image)
     }
 
     const submitForm = async (e) => {
@@ -53,7 +54,7 @@ const Share = () => {
             data.append("mediaType", "Image");
 
             try {
-                let postRes = await axios.post('http://localhost:7000/api/v1/post', 
+                let postRes = await axios.post('https://waawsocial-api.herokuapp.com/api/v1/post', 
                 data,
                 {
                     headers: {
@@ -73,7 +74,7 @@ const Share = () => {
             data.append("mediaType", "Video");
 
             try {
-                let postRes = await axios.post('http://localhost:7000/api/v1/post', 
+                let postRes = await axios.post('https://waawsocial-api.herokuapp.com/api/v1/post', 
                 data,
                 {
                     headers: {
@@ -81,6 +82,7 @@ const Share = () => {
                         'access-token': user.token
                     }
                 });
+                window.location.reload();
                 if (postRes.data.success) return toast.success(postRes.data.msg);   
             } catch (err) {
                 if (!err.response.data.success) return toast.error(err.response.data.msg);   
@@ -137,7 +139,7 @@ const Share = () => {
                 {
                     image && (
                         <div className="share__preview__container">
-                            <img className="share__img__preview" src={URL.createObjectURL(image)} alt=""/>
+                            <img className="share__img__preview" src={URL.createObjectURL(image)} alt="image"/>
                             {/* <span >Clear</span> */}
                             <Cancel className="share__cancel" onClick={() => setImage(null)} />
                         </div>
@@ -147,7 +149,7 @@ const Share = () => {
                 { 
                     video && (
                         <div className="share__preview__container">
-                            <video className="share__img__preview" src={URL.createObjectURL(video)} controls autoPlay alt=""/>
+                            <video className="share__img__preview" src={URL.createObjectURL(video)} controls autoPlay alt="video"/>
                             {/* <span >Clear</span> */}
                             <Cancel className="share__cancel" onClick={() => setVideo(null)} />
                         </div>

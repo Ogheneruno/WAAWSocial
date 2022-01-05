@@ -10,6 +10,8 @@ import CollectionsBookmarkIcon from '@material-ui/icons/CollectionsBookmark';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import { Users } from '../dummyData';
+import CloseFriend from './CloseFriends';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -19,9 +21,20 @@ const useStyles = makeStyles(theme => ({
         paddingTop: theme.spacing(9),
         color: 'white',
         position: 'sticky',
+        overflowY: 'scroll',
         top: 0,
         [theme.breakpoints.down('sm')]: {
             paddingTop: theme.spacing(6),
+        },
+        '&::-webkit-scrollbar': {
+            width: '3px',
+            borderRadius: '50%',
+        },
+        '&::-webkit-scrollbar-track': {
+            backgroundColor: '#f1f1f1',
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgb(179, 179, 179)',
         }
     },
 
@@ -57,6 +70,27 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("sm")]: {
             display:'none'
         }
+    },
+
+    sidebarButton: {
+        width: '150px',
+        border: 'none',
+        padding: '10px',
+        borderRadius: '5px',
+        fontWeight: 'bold',
+        fontSize: '13.5px',
+        cursor: 'pointer',
+        color: theme.palette.primary.main,
+    },
+
+    sidebarHr: {
+        margin: '20px 0',
+    },
+
+    sidebarFriendList: {
+        padding: 0,
+        margin: 0,
+        listStyle: 'none',
     }
 }))
 
@@ -113,6 +147,14 @@ const Left = () => {
                 <IconButton className={classes.iconButton}> <PowerSettingsNewIcon className={classes.icon} /> </IconButton>
                 <Typography className={classes.text}>Logout</Typography>
             </div>
+
+            <button className={classes.sidebarButton}>See More</button>
+            <hr className={classes.sidebarHr} />
+            <ul className={classes.sidebarFriendList}>
+            {Users.map(u => (
+                <CloseFriend key={u.id} user={u} />
+                ))}
+            </ul>
         </Container>
     )
 }

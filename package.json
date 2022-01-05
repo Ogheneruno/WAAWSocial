@@ -19,6 +19,7 @@
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "socket.io-client": "^4.4.0",
     "timeago.js": "^4.0.2",
     "web-vitals": "^1.1.2"
   },
@@ -46,5 +47,4 @@
       "last 1 safari version"
     ]
   }
-
 }

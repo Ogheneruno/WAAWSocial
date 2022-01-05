@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import {Card, 
@@ -9,7 +9,8 @@ import {Card,
         Collapse, 
         Avatar, 
         IconButton, 
-        Typography} from '@material-ui/core';
+        Typography,
+        Badge} from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import CommentIcon from '@material-ui/icons/Comment';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -17,13 +18,19 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { format } from 'timeago.js';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const useStyles = makeStyles((theme) => ({
   root: {
         marginBottom: theme.spacing(4)
     },
   media: {
-    height: 'auto',
+    maxHeight: '500px',
+    objectFit: 'contain',
+    // height: 'auto',
     // paddingTop: '56.25%', // 16:9
   },
   expand: {
@@ -41,20 +48,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard({data}) {
+export default function PostCard({data}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [like, setLike] = useState(data.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const [comment, setComment] = useState(data.comments.length);
+  const [isCommented, setIsCommented] = useState(false);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    setIsLiked(data.likes.includes(user.user._id))
+  }, [user.user._id, data.likes])
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const likeHandler = async () => {
+    try {
+      await axios.put("http://localhost:7100/api/v1/post/"+data._id+"/like", { userId: user.user._id });
+      if (data.success) toast.success(data.msg);
+    } catch (err) {
+      
+    }
+    setLike(isLiked ? like-1 : like+1);
+    setIsLiked(!isLiked);
+  }
+
+  const commentHandler = () => {
+    // setComment(isCommented ? comment-1 : comment+1);
+    setIsCommented(!isCommented);
+  }
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar src={data.user ? data.user.avatar : ''} className={classes.avatar} />
-  
+          <Link to={`/profile/${data.user.username}`} style={{textDecoration: 'none'}}>
+            <Avatar src={data.user ? data.user.avatar : ''} className={classes.avatar} />
+          </Link>
         }
         action={
           <IconButton aria-label="settings">
@@ -95,14 +128,18 @@ export default function RecipeReviewCard({data}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        <IconButton onClick={likeHandler} aria-label="like a post">
+          <Badge badgeContent={like} color="primary">
+            <FavoriteIcon />
+          </Badge>
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="comment">
-          <CommentIcon />
+        <IconButton onClick={commentHandler} aria-label="comment">
+          <Badge badgeContent={comment} color="primary">
+            <CommentIcon />
+          </Badge>
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -119,26 +156,16 @@ export default function RecipeReviewCard({data}) {
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
+            
           </Typography>
           <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-            heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-            browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-            and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-            pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+            
           </Typography>
           <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-            without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-            medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-            again without stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
+            
           </Typography>
           <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
+            
           </Typography>
         </CardContent>
       </Collapse>

@@ -10,8 +10,7 @@ export const loginCall = async (userCredentials, dispatch) => {
             let res = await axios.post('http://localhost:7000/api/v1/auth/login', userCredentials);
             if (res.data.success) toast.success(res.data.msg);
             dispatch({ type: "LOGIN_SUCCESS", payload: res.data.data });
-            window.location.href = "/";    
-
+            // window.location.href = "/";       
 
         } catch (err) {
 

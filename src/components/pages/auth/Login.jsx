@@ -7,7 +7,7 @@ import { TextField, Button } from '@material-ui/core';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../context/AuthContext';
 import { loginCall } from '../../../apiCalls';
-
+import { CircularProgress } from '@material-ui/core';
 
 
 
@@ -30,7 +30,10 @@ const useStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: 'rgb(13, 136, 136)',
             color: '#fff',
-        }
+        },
+        // '&:disabled': {
+        //     cursor: 'not-allowed'
+        // }
     }
 
   }));
@@ -69,10 +72,13 @@ const Login = () => {
                         <TextField id="outlined-basic" type="text" label="Username or Email" variant="outlined" inputRef={userInput} />
                         <TextField id="outlined-basic" type="password" label="Password" variant="outlined" inputRef={password} />
 
-                        <Button type={'submit'} className={classes.btn1} variant="contained">
-                            Login
+                        <Button type={'submit'} className={classes.btn1} variant="contained" disabled={isFetching}>
+                            {isFetching ? <CircularProgress color="white" size="20px" /> : "Login"}
                         </Button>
-
+                        {/* <span>Forgot Password?</span>
+                        <Button type={'submit'} className={classes.btn1} variant="contained">
+                            {isFetching ? (<CircularProgress color="white" size="20px" />) : ("Create a New Account")}
+                        </Button> */}
                     </form>
                 </div>
             </div>

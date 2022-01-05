@@ -10,7 +10,7 @@ const Sidebar = () => {
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <RssFeed className="sidebarIcon" />
-            <span className="sidebarListItemText">Feed</span>
+            <span className="sidebarListItemText">MainFeed</span>
           </li>
           <li className="sidebarListItem">
             <Chat className="sidebarIcon" />
@@ -38,11 +38,11 @@ const Sidebar = () => {
           </li>
           <li className="sidebarListItem">
             <Event className="sidebarIcon" />
-            <span className="sidebarListItemText">Courses</span>
+            <span className="sidebarListItemText">Events</span>
           </li>
           <li className="sidebarListItem">
             <School className="sidebarIcon" />
-            <span className="sidebarListItemText">Feed</span>
+            <span className="sidebarListItemText">Courses</span>
           </li>
         </ul>
         <button className="sidebarButton">See More</button>

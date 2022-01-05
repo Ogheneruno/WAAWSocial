@@ -19,26 +19,40 @@ const useStyles = makeStyles(theme => ({
 const MainFeed = () => {
     const classes = useStyles();
     const [posts, setPosts] = useState([]);
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
 
-    const getPosts = async () => {
-        let res = await axios.get("http://localhost:7000/api/v1/post", {headers: {
-                'content-type': 'application/json',
-                'access-token': user ? user.token : ""
+    // const getPosts = async () => {
+    //     let res = await axios.get("http://localhost:7000/api/v1/post", {headers: {
+    //             'content-type': 'application/json',
+    //             'access-token': user ? user.token : ""
+    //         }
+    //     });
+
+    //     setPosts(res.data.allPosts);
+
+    // }
+
+    // useEffect(() => {
+    //     getPosts();
+    // }, [])
+
+    useEffect(() => {
+        const getTimelinePosts = async () => {
+        let res = await axios.get("http://localhost:7100/api/v1/post/timeline" + user._id, {headers: {
+            'content-type': 'application/json',
+            'access-token': user ? user.token : ""
             }
         });
 
-        setPosts(res.data.allPosts);
+            setPosts(res.data.userPosts.sort((p1, p2) => {return new Date(p2.createdAt) - new Date(p1.createdAt)}));
+        }
+        getTimelinePosts();
+    }, [user._id])
 
-    }
-
-    useEffect(() => {
-        getPosts();
-    }, [posts])
 
     return (
        <Container className={classes.container}>
-           <Share />
+           {user.user.username === user.user.username && <Share />}
            {
                posts.map(post => (
                 <Post key={post._id} data={post} />

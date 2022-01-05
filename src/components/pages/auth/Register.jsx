@@ -51,9 +51,13 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!username.current.value) return toast.error('Username is required.');
-        if(!email.current.value) return toast.error('Username is required.');
-        if(!password.current.value) return toast.error('Username is required.');
-        if(!gender.current.value) return toast.error('Username is required.');
+        if(!email.current.value) return toast.error('Email is required.');
+        if(!password.current.value) return toast.error('Password is required.');
+        if(!gender.current.value) return toast.error('Gender is required.');
+
+        // if(password.current.value !== confirmPassword.current.value) {
+        //     password.current.setCustomValidity("Passwords do not match!");
+        // };
 
         const user = {
             username: username.current.value,
