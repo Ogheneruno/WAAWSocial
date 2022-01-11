@@ -31,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: 'rgb(13, 136, 136)',
             color: '#fff',
         },
-        // '&:disabled': {
-        //     cursor: 'not-allowed'
-        // }
+        '&:disabled': {
+            color: 'green',
+            cursor: 'not-allowed'
+        }
     }
 
   }));
@@ -44,7 +45,7 @@ const Login = () => {
     const classes = useStyles();
     const userInput = useRef();
     const password = useRef();
-    const{ isFetching, dispatch } = useContext(AuthContext);
+    const{ isFetching, dispatch, error } = useContext(AuthContext);
 
 
     const handleSubmit = async (e) => {
@@ -75,6 +76,9 @@ const Login = () => {
                         <Button type={'submit'} className={classes.btn1} variant="contained" disabled={isFetching}>
                             {isFetching ? <CircularProgress color="white" size="20px" /> : "Login"}
                         </Button>
+
+                        {error && <span style={{color:"red"}}>Something went wrong...</span>}
+
                         {/* <span>Forgot Password?</span>
                         <Button type={'submit'} className={classes.btn1} variant="contained">
                             {isFetching ? (<CircularProgress color="white" size="20px" />) : ("Create a New Account")}

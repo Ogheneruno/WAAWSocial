@@ -29,6 +29,7 @@ function App() {
         <Route path="/profile/:username" component= {Profile}></Route>
       </Switch>
     </Router>
+    
     <Toaster 
       position="top-right"
       toastOptions={{
